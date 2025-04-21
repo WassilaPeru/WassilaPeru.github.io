@@ -28,7 +28,7 @@ fetch('story.html')
       box.textContent = name;
 
       box.addEventListener('click', () => {
-        contentDiv.innerHTML = p.innerHTML.trim();
+        contentDiv.innerHTML = p.textContent.trim();
         sidebar.classList.add('open');
       });
 
