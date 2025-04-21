@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Twine Visualization</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Timeline Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>body { display: none; }</style>
+  <script>
+    const password = prompt("Enter password:");
+    const correctPassword = "topsecret";
+
+    if (password === correctPassword) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.style.display = "block";
+      });
+    } else {
+      document.write("<h1>Access Denied</h1><p>Reload to try again.</p>");
+    }
+  </script>
 </head>
 <body>
   <div id="container">
@@ -13,7 +25,6 @@
   <div id="sidebar" class="sidebar">
     <div id="content"></div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
