@@ -45,4 +45,8 @@ body {
   .sidebar.open {
     right: 0;
   }
+
+#content {
+    white-space: pre-wrap;
+}
   
