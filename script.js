@@ -2,6 +2,8 @@ const container = document.getElementById("container");
 const viewport = document.getElementById("viewport");
 const sidebar = document.getElementById("sidebar");
 const contentDiv = document.getElementById("content");
+let activeBox = null;
+
 
 let scale = 1;
 let originX = 0;
@@ -28,9 +30,23 @@ fetch('story.html')
       box.textContent = name;
 
       box.addEventListener('click', () => {
-        contentDiv.innerHTML = p.textContent.trim();
+        // Reset the previous active box
+        if (activeBox) activeBox.style.backgroundColor = "";
+      
+        activeBox = box;
+        box.style.backgroundColor = "salmon";
+      
+        const title = `<strong>${name}</strong><br><br>`;
+        let content = p.textContent.trim().replace(/\n/g, "<br>");
+        content = content.replace(
+          /(https?:\/\/[^\s<]+)/g,
+          url => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+        );
+        contentDiv.innerHTML = title + content;
         sidebar.classList.add('open');
       });
+      
+      
 
       viewport.appendChild(box);
     });
@@ -82,7 +98,12 @@ function updateTransform() {
 
 // Close sidebar on click outside
 document.addEventListener('click', (e) => {
-  if (!sidebar.contains(e.target) && !e.target.classList.contains('box')) {
-    sidebar.classList.remove('open');
-  }
-});
+    if (!sidebar.contains(e.target) && !e.target.classList.contains('box')) {
+      sidebar.classList.remove('open');
+      if (activeBox) {
+        activeBox.style.backgroundColor = "";
+        activeBox = null;
+      }
+    }
+  });
+  
